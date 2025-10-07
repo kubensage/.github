@@ -25,37 +25,13 @@ and external observability tools.
 
 Kubensage follows a **distributed and extensible architecture** composed of several interoperable components:
 
-### 🛰️ Agent
-
-The **Kubensage Agent** is deployed on Kubernetes nodes.
-It interfaces directly with the **CRI API** to collect low-level container and runtime metrics.
-Metrics are streamed via **gRPC** to one or more Kubensage Relays for processing and aggregation.
-
-### 🔁 Relay
-
-The **Kubensage Relay** acts as a smart proxy between agents and consumers.
-It receives metrics streams from multiple nodes, parses and normalizes the data, and forwards it through supported
-transport protocols (such as gRPC or HTTP).
-This separation improves scalability and simplifies data routing within large clusters.
-
-### 📡 Exporter Prometheus
-
-The **Kubensage Exporter Prometheus** component exposes metrics received from relays through a **Prometheus-compatible
-HTTP endpoint**,
-making them easily scrapeable and ready for integration with any Prometheus-based observability stack.
-
-### 📊 Grafana Dashboards
-
-A curated set of **Grafana dashboards** is included to visualize the collected metrics.
-These dashboards provide insights into node health, container activity, runtime performance, and system-level trends —
-ready to import and customize.
-
-### ⚙️ Common
-
-The **Common** module contains shared Go utilities, data structures, and logic used across all Kubensage components.
-It ensures code consistency and reusability throughout the ecosystem.
-
----
+| Component                                                                   | Description                                   | Language |
+|-----------------------------------------------------------------------------|-----------------------------------------------|----------|
+| [**agent**](https://github.com/kubensage/agent)                             | Collects node-level metrics via CRI API       | Go       |
+| [**relay**](https://github.com/kubensage/relay)                             | Aggregates and forwards metrics from agents   | Go       |
+| [**exporter-prometheus**](https://github.com/kubensage/exporter-prometheus) | Exposes data for Prometheus scraping          | Go       |
+| [**grafana-dashboards**](https://github.com/kubensage/grafana-dashboards)   | Prebuilt dashboards for metrics visualization | JSON     |
+| [**common**](https://github.com/kubensage/common)                           | Shared utilities and types across modules     | Go       |
 
 ## 🌐 Why Kubensage?
 
@@ -64,20 +40,6 @@ It ensures code consistency and reusability throughout the ecosystem.
 * **Native** – Built entirely in Go, integrates naturally with Kubernetes and Prometheus.
 * **Scalable** – Suitable for clusters of any size.
 * **Open & Extensible** – Fully open-source with clean APIs for extension.
-
----
-
-## 📦 Getting Started
-
-You can find each Kubensage component in its dedicated repository:
-
-| Component                                        | Description                                   | Language |
-|--------------------------------------------------|-----------------------------------------------|----------|
-| [**agent**](./agent)                             | Collects node-level metrics via CRI API       | Go       |
-| [**relay**](./relay)                             | Aggregates and forwards metrics from agents   | Go       |
-| [**exporter-prometheus**](./exporter-prometheus) | Exposes data for Prometheus scraping          | Go       |
-| [**grafana-dashboards**](./grafana-dashboards)   | Prebuilt dashboards for metrics visualization | JSON     |
-| [**common**](./common)                           | Shared utilities and types across modules     | Go       |
 
 ---
 
